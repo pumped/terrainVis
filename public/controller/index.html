@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+
+    <link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/bootstrap.min.css" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="css/bootstrap-theme.css" title="no title" charset="utf-8">
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <script src="http://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
+    <script type="text/javascript" src="js/typeahead.js"></script>
+    <script type="text/javascript" src="js/typeahead-addresspicker.min.js"></script>
+
+    <script type="text/javascript" src="js/ui.js"></script>
+		<script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/controllerLayerManager.js"></script>
+
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.custom.min.css" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <style media="screen">
+
+
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-fixed-top navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Terrain Vis</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav layerSelector" role="tablist">
+            <li class="active"><a href="#floodTab" data-id="2" data-toggle="tab">Flood</a></li>
+            <li><a href="#historyTab" data-id="6" data-toggle="tab">History</a></li>
+            <li><a href="#otherTab" data-id="5" data-toggle="tab">Other</a></li>
+            <!--<li><a href="#housing" data-id="5">Evacuation Zones</a></li>
+            <li><a href="#internet" data-id="3">Internet</a></li>
+            <li><a href="#science" data-id="4">Science</a></li>-->
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li id="locateMenu" class="dropdown">
+              <a id="drop3" href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                <span class="glyphicon glyphicon-map-marker"></span>
+              </a>
+              <ul class="dropdown-menu" aria-labelledby="drop3">
+                <li>
+                  <h2>Locate an address</h2>
+                  <div id="adressSearch">
+              			<input id="address" type="text" placeholder="1 James Cook Drive, QLD, Australia" />
+              		</div>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div><!-- /.nav-collapse -->
+      </div><!-- /.container -->
+    </nav>
+
+
+<div class="tab-content">
+  <div role="tabpanel" class="tab-pane" id="otherTab">
+    <div class="container-fluid main">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="layerCard">
+            <a href="#" data-id="3">
+              <h2>Internet Quality</h2>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="layerCard">
+            <a href="#" data-id="4">
+              <h2>Gravity Anomaly</h2>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="layerCard">
+            <a href="#" data-id="9">
+              <h2>Magnetic Intensity</h2>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="layerCard">
+            <a href="#" data-id="10">
+              <h2>Land Use</h2>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="layerCard">
+            <a href="#" data-id="7">
+              <h2>Population Estimates</h2>
+            </a>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="layerCard">
+            <a href="#" data-id="8">
+              <h2>Housing Stress</h2>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div role="tabpanel" class="tab-pane" id="historyTab">...</div>
+  <div role="tabpanel" class="tab-pane active" id="floodTab">
+      <div class="container-fluid main">
+
+        <div class="row">
+          <div id="heightContainer" class="col-sm-6 col-xs-12">
+            <div class="cardContainer">
+              <div id="height" class="info">
+          			<span class="value">6</span><span class="units">m</span>
+          			<div class="title">Water Level</div>
+          		</div>
+            </div>
+          </div>
+
+          <div class="col-sm-6">
+            <div class="cardContainer">
+              <h2>Overlays</h2>
+              <ul id="overlaySelector">
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <span><input type="checkbox" value="" data-id="5"></span>
+                      Storm Surge Evacuation Zones
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <span><input type="checkbox" value="" data-id="7"></span>
+                      Populated areas
+                    </label>
+                  </div>
+                </li>
+                <li>
+                  <div class="checkbox">
+                    <label>
+                      <span><input type="checkbox" value="" data-id="10"></span>
+                      Land Use
+                    </label>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="row">
+          <div class="col-md-12">
+            <div class="cardContainer">
+              <div id="slider"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-sm-12 col-xs-12" id="legendContainer">
+            <div class="cardContainer">
+              <h2>Legend</h2>
+              <ul id="legend">
+                <li><span class="glyphicon glyphicon-stop" style="color:#E80727;"></span> <3m</li>
+                <li><span class="glyphicon glyphicon-stop" style="color:#F77F00;"></span> 3m - 4m</li>
+                <li><span class="glyphicon glyphicon-stop" style="color:#F9E812;"></span> 4m - 6m</li>
+                <li><span class="glyphicon glyphicon-stop" style="color:#9ABADE;"></span> 6m - 8m</li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+  </div>
+</div>
+
+  </body>
+</html>

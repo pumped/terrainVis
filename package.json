@@ -1,0 +1,13 @@
+{
+  "name": "terrainvis",
+  "version": "0.0.1",
+  "description": "A simple terrain vis tool",
+  "main": "app.js",
+  "author": "Dylan Mathiesen",
+  "private": true,
+  "license": "BSD",
+  "dependencies": {
+    "express": "^3.4.8",
+    "socket.io": "^1.3.6"
+  }
+}

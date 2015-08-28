@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
+    <link rel="stylesheet" href="css/ol.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="js/ol.js"></script>
+    
+    <title>Drag rotate and zoom example</title>
+  </head>
+  <body>
+  	<div id="calibrate" style="display:none">
+  		<h3>Calibration</h3>
+  		
+  		<ul>
+	  		<li>
+	  			<label for="zoomAdjust">Zoom</label>
+	  			<input id="zoomValue" type="number"/>
+	  			<input id="zoomAdjust" class="zoom adjust" type="range" min=-50 max=50 />
+	  		</li>
+	  		<li>
+		  		<label for="rotationAdjust">rotate</label>
+		  		<input id="rotationValue" type="number"/>
+		  		<input id="rotationAdjust" class="rotate adjust" type="range" min=-50 max=50 />		  		
+		  	</li>
+		  	<li>
+		  		<label for="xAdjust">X</label>
+		  		<input id="xValue" type="number"/>
+		  		<input id="xAdjust" class="x adjust" type="range" min=-50 max=50 />		  		
+		  	</li>
+		  	<li>
+		  		<label for="yAdjust">Y</label>
+		  		<input id="yValue" type="number"/>
+		  		<input id="yAdjust" class="y adjust" type="range" min=-50 max=50 />
+		  	</li>	  	
+  		</ul>
+  		
+  	</div>
+
+    <div id="height" class="info">
+      <span class="value">20</span><span class="units">m</span>
+      <div class="title">Water Level</div>
+    </div>
+
+
+    <div id="map" class="map" style="height:100%"></div>
+
+  </body>
+
+    <script type="text/javascript" src="js/calibrate.js"></script>
+    <script type="text/javascript" src="js/animatedRaster.js"></script>
+    <script type="text/javascript" src="js/layers.js"></script>
+    <script type="text/javascript" src="js/drag-rotate-and-zoom.js"></script>
+</html>

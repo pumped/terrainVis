@@ -1,0 +1,55 @@
+<html>
+	<head>
+		<script type="text/javascript" src="js/jquery.js"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script type="text/javascript" src="js/controller.js"></script>
+		<script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+		<script src="js/jquery.ui.touch-punch.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="css/jquery-ui-1.10.4.custom.min.css" />
+		<style type="text/css">
+			body {
+				font-family:Helvetica, Arial, sans-serif;
+			}
+
+			#slider {
+				font-size: 100px;
+				margin-top:100px;
+
+			}
+
+			.info {
+				font-size:3em;
+				display:inline-block;
+			}
+
+			.info .value {
+				font-size:4em;
+			}
+			.info .units {
+				font-size:2em;
+				color: #888;
+			}
+			.info .title {
+				font-size:1em;
+				color: #888;
+				text-align: center;
+			}
+
+			#year {
+				float:right;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="height" class="info">
+			<span class="value">6</span><span class="units">m</span>
+			<div class="title">Water Level</div>
+		</div>
+
+		<!--<div id="year" class="info">
+			<span class="value">2050</span><span class="units">m</span><div class="title">Blah Year</div>
+		</div>-->
+
+		<div id="slider"></div>
+	</body>
+</html>
