@@ -195,11 +195,11 @@ Animater.prototype._calculateStepSize = function(currentSize, targetSize) {
 	if (currentSize > targetSize) {
 		backwards = true;
 		stepSize = -stepSize;
-		console.log("backwards");
+		//console.log("backwards");
 	} else {
 		stepSize = stepSize;
 		backwards = false;
-		console.log("forwards");
+		//console.log("forwards");
 	}
 
 	/*console.log(backwards);
@@ -234,7 +234,7 @@ Animater.prototype._calculateNewFrame = function() {
 Animater.prototype._animate = function() {
 
 	if (!this.animating) {
-		console.log("animating finished");
+		//console.log("animating finished");
 		return;
 	}
 
@@ -242,8 +242,8 @@ Animater.prototype._animate = function() {
 
 
 	//draw frame
-	console.log(this);
-	console.log(this.currentFrame);
+	//console.log(this);
+//	console.log(this.currentFrame);
 	this.layer.drawImage(this.currentFrame.toFixed(1));
 
 

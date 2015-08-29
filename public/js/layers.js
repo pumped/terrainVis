@@ -2,6 +2,9 @@
 function Layers(map) {
 	this.map = map;
 
+	this.years = [1952,1959,1976,1982,1985,1989,1992,2005];
+	this.layerIDs = [6,11,12,13,14,15,16,17];
+
 	this.layers = {};
 
 	this.setupLayers();
@@ -174,7 +177,7 @@ Layers.prototype.setupLayers = function() {
 	//Gravity Anomaly
 	var gravityAnomaly = new Layer();
 	var gravityAnomalySource = new ol.source.TileArcGISRest({
-		url: 'http://www.ga.gov.au/gisimg/rest/services/earth_science/Geoscience_Australia_National_Geophysical_Grids/MapServer',
+		url: 'http://'+proxyURL+'www.ga.gov.au/gisimg/rest/services/earth_science/Geoscience_Australia_National_Geophysical_Grids/MapServer',
 		params: {
 			LAYERS: '12'
 		}
@@ -190,7 +193,7 @@ Layers.prototype.setupLayers = function() {
 	//Red Zone
 	var redZone = new Layer();
 	var redZoneSource = new ol.source.TileArcGISRest({
-		url: 'http://maps.townsville.qld.gov.au/arcgis/rest/services/MOSAICEXTERNAL/Asset_Infrastructure_Property/MapServer/export',
+		url: 'http://'+proxyURL+'maps.townsville.qld.gov.au/arcgis/rest/services/MOSAICEXTERNAL/Asset_Infrastructure_Property/MapServer/export',
 		params: {
 			LAYERS: 'show:61'
 		}
@@ -203,24 +206,10 @@ Layers.prototype.setupLayers = function() {
 	this.addLayer(redZone, 5);
 
 
-	//historic
-	var historic = new Layer();
-	var historicSource = new ol.source.TileArcGISRest({
-		url: 'http://maps.townsville.qld.gov.au/arcgis/rest/services/Imagery/Aerial_Photos_1959/MapServer/'
-	})
-	var historicLayer = new ol.layer.Tile({
-		source:historicSource,
-		opacity:1
-	});
-	historic.setLayer(historicLayer);
-	this.addLayer(historic, 6);
-
-
-
 	//population estimates
 	var populationEstimates = new Layer();
 	var populationEstimatesSource = new ol.source.TileArcGISRest({
-		url: 'http://www.ga.gov.au/gis/rest/services/hazards/NEXIS_National_Exposure_Information_System_Population_Density_Exposure/MapServer',
+		url: 'http://'+proxyURL+'www.ga.gov.au/gis/rest/services/hazards/NEXIS_National_Exposure_Information_System_Population_Density_Exposure/MapServer',
 		params: {
 			LAYERS: 'show:0,1,2,3,4'
 		}
@@ -253,7 +242,7 @@ Layers.prototype.setupLayers = function() {
 	//Magnetic Intensity
 	var magneticIntensity = new Layer();
 	var magneticIntensitySource = new ol.source.TileArcGISRest({
-		url: 'http://www.ga.gov.au/gisimg/rest/services/earth_science/Geoscience_Australia_National_Geophysical_Grids/MapServer',
+		url: 'http://'+proxyURL+'www.ga.gov.au/gisimg/rest/services/earth_science/Geoscience_Australia_National_Geophysical_Grids/MapServer',
 		params: {
 			LAYERS: 'show:3'
 		}
@@ -280,7 +269,34 @@ Layers.prototype.setupLayers = function() {
 	});
 	landUse.setLayer(landUseLayer);
 	this.addLayer(landUse, 10);
+
+
+
+
+	//historic
+	for (var i=0; i<this.years.length;i++) {
+		var historic = new Layer();
+		var historicSource = new ol.source.TileArcGISRest({
+			url: 'http://'+proxyURL+'maps.townsville.qld.gov.au/arcgis/rest/services/Imagery/Aerial_Photos_'+this.years[i]+'/MapServer/'
+		})
+		var historicLayer = new ol.layer.Tile({
+			source:historicSource,
+			opacity:1
+		});
+		historic.setLayer(historicLayer);
+		this.addLayer(historic, this.layerIDs[i]);
+	}
+
 }
+
+Layers.prototype.setTime = function(time) {
+	console.log("setting layers");
+	if (time < this.years.length) {
+		//var year = this.years(time);
+		this.setLayers([this.layerIDs[time]]);
+	}
+}
+
 
 //land usage - Not working
 /*var landUsage = new Layer();

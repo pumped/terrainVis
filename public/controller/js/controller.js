@@ -42,6 +42,12 @@ $(document).ready(function(){
 		socket.emit('height',height);
 	});
 
+	//year change
+	ui.onTimeChange(function timeChange(time){
+		console.log("sending");
+		socket.emit('time',time);
+	});
+
 	//address changed
 	ui.onAddressChanged(function addressChange(latLng){
 		console.log(latLng);

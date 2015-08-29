@@ -7,16 +7,16 @@
     <link rel="stylesheet" href="css/ol.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
 
-    <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
+    <script src="js/jquery.js"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script type="text/javascript" src="js/ol.js"></script>
-    
+
     <title>Drag rotate and zoom example</title>
   </head>
   <body>
   	<div id="calibrate" style="display:none">
   		<h3>Calibration</h3>
-  		
+
   		<ul>
 	  		<li>
 	  			<label for="zoomAdjust">Zoom</label>
@@ -26,20 +26,20 @@
 	  		<li>
 		  		<label for="rotationAdjust">rotate</label>
 		  		<input id="rotationValue" type="number"/>
-		  		<input id="rotationAdjust" class="rotate adjust" type="range" min=-50 max=50 />		  		
+		  		<input id="rotationAdjust" class="rotate adjust" type="range" min=-50 max=50 />
 		  	</li>
 		  	<li>
 		  		<label for="xAdjust">X</label>
 		  		<input id="xValue" type="number"/>
-		  		<input id="xAdjust" class="x adjust" type="range" min=-50 max=50 />		  		
+		  		<input id="xAdjust" class="x adjust" type="range" min=-50 max=50 />
 		  	</li>
 		  	<li>
 		  		<label for="yAdjust">Y</label>
 		  		<input id="yValue" type="number"/>
 		  		<input id="yAdjust" class="y adjust" type="range" min=-50 max=50 />
-		  	</li>	  	
+		  	</li>
   		</ul>
-  		
+
   	</div>
 
     <div id="height" class="info">
@@ -52,6 +52,7 @@
 
   </body>
 
+    <script type="text/javascript" src="js/marker.js"></script>
     <script type="text/javascript" src="js/calibrate.js"></script>
     <script type="text/javascript" src="js/animatedRaster.js"></script>
     <script type="text/javascript" src="js/layers.js"></script>

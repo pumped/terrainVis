@@ -1,7 +1,9 @@
 var socket;
 var layers;
+var proxyURL = "localhost:8000/"
 
 $(document).ready(function(){
+
   socket = io();
   socket.emit('height','0');
 
@@ -16,7 +18,7 @@ $(document).ready(function(){
       new ol.layer.Tile({
         source: new ol.source.XYZ({
           //url: 'http://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}.png',
-          url: 'http://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
+          url: 'http://'+proxyURL+'server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}',
           //url: 'http://tile.thunderforest.com/transport-dark/{z}/{x}/{y}.png',
           attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })]
         })
@@ -24,7 +26,7 @@ $(document).ready(function(){
       new ol.layer.Tile({
         source: new ol.source.XYZ({
           //url: 'http://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}.png',
-          url: 'http://tile.openstreetmap.se/hydda/roads_and_labels/{z}/{x}/{y}.png',
+          url: 'http://'+proxyURL+'tile.openstreetmap.se/hydda/roads_and_labels/{z}/{x}/{y}.png',
           attributions: [new ol.Attribution({ html: ['&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, &copy; <a href="http://cartodb.com/attributions">CartoDB</a>'] })],
           type: "hyb"
         })
@@ -40,6 +42,10 @@ $(document).ready(function(){
 
   //create new calibration object
   var calibration = new Calibrate(map);
+
+  //load marker layer
+  var marker = new Marker(map);
+
 
   //load new layers
   layers = new Layers(map);
@@ -61,5 +67,15 @@ $(document).ready(function(){
       $("#height").show();
     }
   });
+
+  socket.on('location', function(data){
+    marker.setLocation(data.location.lat, data.location.lng);
+  });
+
+  socket.on('time', function(data){
+    layers.setTime(data.time);
+  });
+
+  marker.setLocation(-19.3285585, 146.75825180000004);
 
 });

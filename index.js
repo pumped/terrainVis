@@ -31,11 +31,27 @@ io.on('connection', function (socket) {
     });
   });
 
+  socket.on('time', function (data) {
+    console.log(data);
+    // we tell the client to execute 'new message'
+    socket.broadcast.emit('time', {
+      time: data
+    });
+  });
+
   socket.on('layers', function (data) {
     console.log("Layers: " + data);
     // we tell the client to execute 'new message'
     socket.broadcast.emit('layers', {
       layers: data
+    });
+  });
+
+  socket.on('location', function (data) {
+    console.log("Location: " + data);
+    // we tell the client to execute 'new message'
+    socket.broadcast.emit('location', {
+      location: data
     });
   });
 /*

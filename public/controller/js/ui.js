@@ -3,6 +3,7 @@ function UIController() {
   this.heightChangeCallbacks = [];
   this.layerChangeCallbacks = [];
   this.addressChangeCallbacks = [];
+  this.timeChangeCallbacks = [];
 }
 
 UIController.prototype.setup = function() {
@@ -64,6 +65,29 @@ UIController.prototype.setup = function() {
     that._addressChanged(latLng);
   });
 
+  $("#locateMenu a").click(function(){
+    console.log("drop menu")
+    $('#address').val("");
+  })
+
+
+
+
+  // timeline
+  $(function() {
+    $( "#timeSlider" ).slider({
+      min:0,
+      max:8,
+      value:6,
+      slide: function(event, ui) {
+        console.log(ui.value);
+        that._timeChanged(ui.value);
+      },
+      create: function(event, ui) {
+        //$('.ui-slider-handle').html('<img src="dragme.png" style="margin-top: 130px;    margin-left: -55px;">');
+      }
+    });
+  });
 }
 
 UIController.prototype._addressChanged = function(latLng) {
@@ -140,4 +164,43 @@ UIController.prototype.onHeightChange = function(callback) {
 
 UIController.prototype.onLayersChange = function(callback) {
   this.layerChangeCallbacks.push(callback);
+}
+
+
+
+
+//time
+UIController.prototype.onTimeChange = function(callback) {
+  this.timeChangeCallbacks.push(callback);
+}
+
+UIController.prototype.setTime = function(time) {
+  // set height in ui
+  $('#timeSlider').slider('value',time);
+  this._updateHeightUI(time);
+
+}
+
+UIController.prototype._updateTimeUI = function(time) {
+  var years = [1952,1959,1976,1982,1985,1989,1992,2005];
+  var year = 2015;
+
+  if (time < years.length) {
+    year = years[time];
+  }
+
+  console.log(year);
+
+  $('#timeVal .value').html(year);
+}
+
+UIController.prototype._timeChanged = function(time) {
+  this._updateTimeUI(time);
+
+  for (i in this.timeChangeCallbacks) {
+    var callback = this.timeChangeCallbacks[i];
+    if (callback && typeof(callback) === "function") {
+      callback(time);
+    }
+  }
 }
