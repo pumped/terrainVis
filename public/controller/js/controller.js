@@ -23,6 +23,9 @@ $(document).ready(function(){
 		console.log(data);
 	});
 
+	socket.on('time', function newTime(data) {
+		ui.setTime(data.time);
+	})
 
 	ui.onLayersChange(function layerChanged(id, on, single){
 		if (single) {

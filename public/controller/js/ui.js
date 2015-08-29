@@ -77,8 +77,8 @@ UIController.prototype.setup = function() {
   $(function() {
     $( "#timeSlider" ).slider({
       min:0,
-      max:8,
-      value:6,
+      max:7,
+      value:1,
       slide: function(event, ui) {
         console.log(ui.value);
         that._timeChanged(ui.value);
@@ -88,6 +88,12 @@ UIController.prototype.setup = function() {
       }
     });
   });
+
+  $('a[href="#historyTab"]').on('shown.bs.tab', function (e) {
+    console.log();
+    that.setTime(1);
+  })
+
 }
 
 UIController.prototype._addressChanged = function(latLng) {
@@ -177,7 +183,7 @@ UIController.prototype.onTimeChange = function(callback) {
 UIController.prototype.setTime = function(time) {
   // set height in ui
   $('#timeSlider').slider('value',time);
-  this._updateHeightUI(time);
+  this._updateTimeUI(time);
 
 }
 
