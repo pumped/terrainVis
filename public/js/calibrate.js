@@ -44,9 +44,9 @@ function Calibrate(map) {
 -3.1498202273024596
 16337660.785122314   16337660.785122314
 -2182837.9025776614 */
-  this.setCenter([16337160.785122314,-2182337.9025776614]);
+  this.setCenter([16338411.434819633,-2181767.7786823874]);
   this.data.setRotation(-3.1498202273024596);
-  this.data.setZoom(12.534);
+  this.data.setZoom(12.748000000000056);
 }
 
 Calibrate.prototype.toggle = function() {
