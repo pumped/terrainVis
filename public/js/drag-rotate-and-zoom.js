@@ -1,6 +1,6 @@
 var socket;
 var layers;
-var proxyURL = "localhost:8000/"
+var proxyURL = ""//"localhost:8000/"
 
 $(document).ready(function(){
 
@@ -52,7 +52,8 @@ $(document).ready(function(){
   layers.setLayer();
 
   socket.on('height', function(data){
-    layers.getLayer(2).getPlayer().animateTo(data.height);
+    var height = Number(data.height);
+    layers.getLayer(2).getPlayer().animateTo(height);
     console.log(data.height);
   });
 

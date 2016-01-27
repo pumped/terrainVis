@@ -158,7 +158,7 @@ function Animater(layer) {
 
 	this.currentFrame = 0;
 
-	this.frameSteps = 0.1;
+	this.frameSteps = 0.2;
 }
 
 Animater.prototype.start = function() {
@@ -189,7 +189,7 @@ Animater.prototype.animateTo = function(value) {
 
 Animater.prototype._calculateStepSize = function(currentSize, targetSize) {
 	//calculate step size
-	var stepSize = 0.2;
+	var stepSize = this.frameSteps;
 	var backwards = false;
 
 	if (currentSize > targetSize) {
